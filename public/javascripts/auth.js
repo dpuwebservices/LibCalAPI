@@ -1,6 +1,7 @@
 
 const https = require('https');
 const creds = require('../../creds.json');
+let token = undefined
 
 function auth(req, res) {
     const data = JSON.stringify({
@@ -22,10 +23,7 @@ function auth(req, res) {
     console.log(`statusCode: ${resp.statusCode}`)
 
     resp.on('data', d => {
-        process.stdout.write(d);
-        let to = d.toString()
-        to = JSON.parse(to)
-        res.json(to)
+        res.json(token = JSON.parse(d.toString()))
     })
     })
 
@@ -38,5 +36,6 @@ function auth(req, res) {
 }
 
 module.exports = {
-    auth
+    auth,
+    token
 };
