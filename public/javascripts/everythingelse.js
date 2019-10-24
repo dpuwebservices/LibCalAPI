@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 const jtr_id = 1432
-const bearer_token = '5709e9c157df7e15a6eae3313dcf16f6d80b6146'
+const bearer_token = '0d27b3f5f4f4f6561f98309ed4ee90c2ab41ecde'
 const api_key = ''
 let promises = []
 
@@ -28,7 +28,7 @@ async function get_category_ids() {
     .then(response => response.json())
     .then(data => 
         {
-            let categories = data[0]["categories"].filter(category => category.name !== "Group Study Rooms")
+            categories = data[0]["categories"].filter(category => category.name !== "Group Study Rooms")
             categories.forEach((category_item) => 
             {
                 promises.push(new Promise((resolve, reject) => 
@@ -43,9 +43,11 @@ async function all_other_reservations(req,res)
 {
     await get_category_ids()
     await Promise.all(promises)
-    .then(responses => res.json(responses))
-    .catch(res.json({"message":"it fucked up"}))
-    .then(res.json({"message":"we somewhere else"}))
+    .then(responses => 
+        {
+            res.json(responses)
+        })
+    .catch(console.log("catch"))
 }
 
 module.exports = {
