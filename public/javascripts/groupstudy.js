@@ -1,5 +1,5 @@
 const group_study_room_cat_id = 3120
-const bearer_token = '0d27b3f5f4f4f6561f98309ed4ee90c2ab41ecde'
+const bearer_token = '5da7c6d9afab7ecda7517edf747f4f08b02bc3de'
 const fetch = require('node-fetch')
 let promises = []
 
@@ -49,5 +49,6 @@ async function group_reservations_today(req, res)
         }))}
 
 module.exports = {
-    group_reservations_today
+    group_reservations_today,
+    get_bookings
 }
