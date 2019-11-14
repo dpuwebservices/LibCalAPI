@@ -1,7 +1,6 @@
 const fetch = require('node-fetch')
-const booking = require('./groupstudy')
+const bearer_token = (require('../../bearer.json')).bearer_token
 const jtr_id = 1432
-const bearer_token = '65365296ef9a4dd183d3f090ce6c5140975f260f'
 let id_promises = []
 let room_promises = []
 
@@ -10,6 +9,7 @@ async function get_category_rooms(category_id)
     return fetch(`https://libcal.depaul.edu/1.1/space/category/${category_id}`,
     {
         headers: 
+
         {
             'Authorization': `Bearer ${bearer_token}`
         }
@@ -52,7 +52,7 @@ async function get_room_bookings(room_id) {
     .then(response => response.json())
     .then(data => data)
 }
-async function all_other_reservations(req,res)
+async function get_not_group_room_reservations(req,res)
 {
     await get_category_ids()
     let rooms = await Promise.all(id_promises)
@@ -74,5 +74,5 @@ async function all_other_reservations(req,res)
 }
 
 module.exports = {
-    all_other_reservations
+    get_not_group_room_reservations
 }

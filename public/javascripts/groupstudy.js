@@ -1,5 +1,5 @@
 const group_study_room_cat_id = 3120
-const bearer_token = '5da7c6d9afab7ecda7517edf747f4f08b02bc3de'
+const bearer_token = (require('../../bearer.json')).bearer_token
 const fetch = require('node-fetch')
 let promises = []
 
@@ -36,7 +36,7 @@ async function get_room_ids() {
             .catch(err => console.error(err))
 }
 
-async function group_reservations_today(req, res) 
+async function get_group_reservations_today(req, res) 
 {
     await get_room_ids()
     await Promise.all(promises).then((responses => 
@@ -49,6 +49,5 @@ async function group_reservations_today(req, res)
         }))}
 
 module.exports = {
-    group_reservations_today,
-    get_bookings
+    get_group_reservations_today,
 }
