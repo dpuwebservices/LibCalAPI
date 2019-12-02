@@ -1,8 +1,8 @@
 const fetch = require('node-fetch')
-const bearer_token = (require('../../bearer.json')).bearer_token
+var bearer_token
+const auth = require('./auth')
 const jtr_id = 1432
 let id_promises = []
-let room_promises = []
 
 async function get_category_rooms(category_id)
 {
@@ -29,8 +29,8 @@ async function get_category_ids() {
     .then(response => response.json())
     .then(data => 
         {
-	    categories = data[0]["categories"].filter(category => category.name !== "Group Study Rooms")
-            categories.forEach((category_item) => 
+            categories = data[0]["categories"].filter(category => category.name !== "Group Study Rooms")
+            categories.forEach(category_item => 
             {
                 id_promises.push(new Promise((resolve, reject) => 
                 {
@@ -39,7 +39,6 @@ async function get_category_ids() {
             })
         })
 }
-
 
 async function get_room_bookings(room_id) {
     return fetch(`https://libcal.depaul.edu/1.1/space/bookings?eid=${room_id}`,
@@ -54,6 +53,8 @@ async function get_room_bookings(room_id) {
 }
 async function get_not_group_room_reservations(req,res)
 {
+    let room_promises = []
+    bearer_token = await auth.auth_check()
     await get_category_ids()
     let rooms = await Promise.all(id_promises)
     .then(responses => 
@@ -68,9 +69,9 @@ async function get_not_group_room_reservations(req,res)
             })
         })
 	.catch(error => console.error(error))
-    let room_bookings = await Promise.all(room_promises).
-        then(responses => res.json(responses)).
-        catch(error => console.error(error))
+    await Promise.all(room_promises)
+        .then(responses => res.json(responses))
+        .catch(error => console.error(error))
 }
 
 module.exports = {

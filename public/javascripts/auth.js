@@ -3,9 +3,9 @@ const https = require('https');
 const fetch = require('node-fetch');
 const creds = require('../../creds.json');
 
-function auth(req, res) {
+function _auth() {
     creds_data = JSON.stringify(creds) 
-    fetch('https://libcal.depaul.edu/1.1/oauth/token', {
+    return fetch('https://libcal.depaul.edu/1.1/oauth/token', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -13,9 +13,26 @@ function auth(req, res) {
         },
         body: creds_data
     }).then(response => response.json())
-    .then(data => res.json(data))
+    .then(data => data.access_token)
 }
 
+async function auth_check(token) {
+ return fetch(`https://libcal.depaul.edu/1.1/calendars`,
+    {
+        headers: 
+        {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+            .then(response => response.json())
+            .then(async data =>
+            {
+                if ('error' in data) return await _auth();
+                return token
+            })
+            .catch(err => console.error(err))
+        }
+
 module.exports = {
-    auth
+    auth_check
 };

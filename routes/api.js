@@ -7,7 +7,7 @@ var notGroupFunctions = require('../public/javascripts/everythingelse')
 var teachLearnFunctions = require('../public/javascripts/teachlearn')
 
 /* GET home page. */
-router.get('/auth', authFunctions.auth);
+//router.get('/auth', authFunctions.auth);
 
 router.get('/today', groupFunctions.get_group_reservations_today);
 router.get('/not_group', notGroupFunctions.get_not_group_room_reservations);

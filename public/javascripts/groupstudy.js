@@ -1,52 +1,18 @@
-const group_study_room_cat_id = 3120
-const bearer_token = (require('../../bearer.json')).bearer_token
+const auth = require('./auth')
+const dates = require('./dates')
+const nick = require('./nicknames')
 const fetch = require('node-fetch')
-let promises = []
+const group_study_room_cat_id = 3120
+var bearer_token
 
-async function get_bookings(room_id) {
-        return fetch(`https://libcal.depaul.edu/1.1/space/bookings?eid=${room_id}`, {
-            headers: {
-                'Authorization': `Bearer ${bearer_token}`
-            }
-        }).then(response => response.json())
-        .then(data => data)
-        .catch(error => console.error(error))
-}
-
-async function get_room_ids() {
-    return fetch(`https://libcal.depaul.edu/1.1/space/category/${group_study_room_cat_id}`,
-    {
-                headers: 
-                {
-                    'Authorization': `Bearer ${bearer_token}`
-                }
-            })
-            .then(response => response.json())
-            .then(data =>
-                {
-                room_ids = data[0]['items']
-                room_ids.forEach((room_id) => 
-                {
-                    promises.push(new Promise((resolve, reject) => 
-                    {
-                        resolve(get_bookings(room_id))
-                    }))
-                })
-            })
-            .catch(err => console.error(err))
-}
 
 async function get_group_reservations_today(req, res) 
 {
-    await get_room_ids()
-    await Promise.all(promises).then((responses => 
-    {
-        console.log(`These are the responses ${responses}`)
-        res.json(responses)
-    })).catch((responses => 
-        {
-            console.log(`This fucked up, but here are the responses: ${responses}`)
-        }))}
+    var today = dates.get_today()
+    bearer_token = await auth.auth_check()
+    let results = await nick.nicknames(bearer_token, group_study_room_cat_id, dates.get_useable_format(today))
+    res.json(results[0].categories[0].spaces)
+}
 
 module.exports = {
     get_group_reservations_today,
