@@ -24,7 +24,8 @@ function get_next_seven_days()
 function get_useable_format(date)
 {
    let year = date.getUTCFullYear() 
-   let month = date.getUTCMonth() 
+    //utcmonth starts at 0 so I add 1
+   let month = date.getUTCMonth() + 1
    let day = date.getUTCDate() 
     if (day.toString().length < 2) day = '0'.concat(day.toString())
    return `${year}-${month}-${day}`

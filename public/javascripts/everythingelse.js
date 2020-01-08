@@ -2,7 +2,7 @@ const fetch = require('node-fetch')
 var bearer_token
 const auth = require('./auth')
 const jtr_id = 1432
-let id_promises = []
+//let id_promises = []
 
 async function get_category_rooms(category_id)
 {
@@ -19,6 +19,7 @@ async function get_category_rooms(category_id)
 }
 
 async function get_category_ids() {
+    let id_promises = []
     return fetch(`https://libcal.depaul.edu/1.1/space/categories/${jtr_id}`,
     {
         headers: 
@@ -38,6 +39,7 @@ async function get_category_ids() {
                 }))
             })
         })
+            .then(() => id_promises)
 }
 
 async function get_room_bookings(room_id) {
@@ -55,7 +57,7 @@ async function get_not_group_room_reservations(req,res)
 {
     let room_promises = []
     bearer_token = await auth.auth_check()
-    await get_category_ids()
+    let id_promises = await get_category_ids()
     let rooms = await Promise.all(id_promises)
     .then(responses => 
         {
