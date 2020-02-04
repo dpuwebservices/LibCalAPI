@@ -15,8 +15,9 @@ In order to run the application you must have a json file called *creds.json* in
 }
  ```
 ## Starting the project
-1. Navigate to the root directory and type `npm start` to start the server.
-2. Make GET requests to the endpoints to receive the formatted html. By default the server is started on port 3000 of localhost.
+1. Navigate to the root directory and type `npm install` to install dependencies.
+2. Type `npm start` to start the server
+3. Make GET requests to the endpoints to receive the formatted html. By default the server is started on port 3000 of localhost.
 
 ## Available Endpoints
 - `/api/today` This gives you the reservations for the group study rooms today
