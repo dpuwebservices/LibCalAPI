@@ -1,5 +1,5 @@
 # LibCalApi
-    This is an expressjs application written by Collin De Kalb to display room reservation information from the LibCal system.
+This is an expressjs application written by Collin De Kalb to display room reservation information from the LibCal system.
     
 ## Requirements
     - Nodejs
