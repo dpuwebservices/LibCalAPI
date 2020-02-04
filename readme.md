@@ -6,8 +6,13 @@ This is an expressjs application written by Collin De Kalb to display room reser
     - npm
     
 ## Setup
-In order to run the application you must have a json file called *creds.json* in the root of the project. You must include the keys *client_id*, *client_secret*, and *grant_type* in the json object.
-    
+In order to run the application you must have a json file called *creds.json* in the root of the project. The file should look like this:
+    {
+    "client_id":"X",
+    "client_secret":"Y",
+    "grant_type":"client_credentials"
+    }
+ 
 ## Starting the project
 1. Navigate to the root directory and type `npm start` to start the server.
 2. Make GET requests to the endpoints to receive the formatted html. By default the server is started on port 3000 of localhost
@@ -25,7 +30,7 @@ In order to run the application you must have a json file called *creds.json* in
     - `groupstudy.js` is responsible for groupstudy rooms
     - `everythingelse.js` is responsible for everything except groupstudy rooms
     - `teachlearn.js` is responsible for teaching and learning rooms
-    - `date.js` is responsible for date functions rooms
+    - `date.js` is responsible for date functions
     - `nicknames.js` is responsible for making the nickname get requests to the api
     - `auth.js` is responsible for the auth functions and supplying the bearer token
     - To edit what data is passed to `index.pug` check for the `res.render` call in the first three js files.
