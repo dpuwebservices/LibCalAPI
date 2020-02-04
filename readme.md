@@ -13,9 +13,9 @@ In order to run the application you must have a json file called *creds.json* in
 2. Make get requests to the endpoints to receive the formatted html
 . 
 ## Available Endpoints
-- `/api/today` //This gives you the reservations for the group study rooms today
-- `/api/not_group` // This gives you the reservations for all rooms that aren't the group study rooms today
-- `/api/teach` //This gives the reservations of teaching and learning rooms for the next seven days
+- `/api/today` This gives you the reservations for the group study rooms today
+- `/api/not_group` This gives you the reservations for all rooms that aren't the group study rooms today
+- `/api/teach` This gives the reservations of teaching and learning rooms for the next seven days
 
 ## Guide to editing
 - Endpoints are defined in the file `/routes/api.js`
