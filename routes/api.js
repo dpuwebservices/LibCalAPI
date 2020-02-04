@@ -10,7 +10,7 @@ var teachLearnFunctions = require('../public/javascripts/teachlearn')
 //router.get('/auth', authFunctions.auth);
 
 router.get('/today', groupFunctions.get_group_reservations_today);
-router.get('/not_group', notGroupFunctions.get_not_group_room_reservations);
+router.get('/not_group', notGroupFunctions.get_everything_else);
 router.get('/teach', teachLearnFunctions.get_teach_learn_week);
 
 process.on('warning', e => console.warn(e.stack));

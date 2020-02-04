@@ -1,5 +1,11 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    all.listings.container
+      each item in t
+          if item.bookings[0]
+              room_container
+                  h3 #{item.name}
+                  ul
+                      each booking in item.bookings
+                          li #{booking.nickname}: #{booking.start} - #{booking.end}

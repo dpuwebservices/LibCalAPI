@@ -19,6 +19,7 @@ function get_next_seven_days()
         dates.push(get_useable_format(new Date(day_in_loop)))
         day_in_loop += day_s
     }
+    console.log(dates)
     return dates 
 }
 function get_useable_format(date)
