@@ -6,7 +6,7 @@ This is an expressjs application written by Collin De Kalb to display room reser
     - npm
     
 ## Setup
-    In order to run the application you must have a json file called *creds.json* in the root of the project. You must include the keys *client_id*, *client_secret*, and *grant_type* in the json object.
+In order to run the application you must have a json file called *creds.json* in the root of the project. You must include the keys *client_id*, *client_secret*, and *grant_type* in the json object.
     
 ## Starting the project
 1. Navigate to the root directory and type `npm start` to start the server.
